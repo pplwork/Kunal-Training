@@ -1,56 +1,46 @@
 class Person {
-	constructor(name, age, salary, sex) {
+	constructor(name, age, salary, gender) {
 		this.name = name
 		this.age = age
 		this.salary = salary
-		this.sex = sex
+		this.gender = gender
 	}
 	static sort(arr, field, order) {
-		let newArr = [...arr] // making copy of original array
+		let newArr = [...arr] // making copy of origial array
 		quickSort(newArr, 0, newArr.length - 1, field)
-		if (order === 'desc') {
+		if (order !== 'asc') {
 			newArr.reverse()
 		}
-		return newArr // final sorted array
+		return newArr
 	}
 }
 
-// quickSort recursive definition
-const quickSort = (arr, low, high, field) => {
-	if (low < high) {
-		let pivot = partition(arr, low, high, field) // return pos of pivot from partition algorithm
-		quickSort(arr, low, pivot - 1, field) // calling recursively to sort left-part of array
-		quickSort(arr, pivot + 1, high, field) // calling recursively to sort right-part of array
-	}
-}
-
-// partition algorithm
+// partion algorithm
 const partition = (arr, low, high, field) => {
-	let pivot = arr[low]
-	let i = low + 1
-	let j = high
-
-	do {
-		while (arr[i][field] <= pivot[field]) {
+	let pivot = arr[high]
+	let i = low - 1
+	for (j = low; j <= high - 1; j++) {
+		if (arr[j][field] < pivot[field]) {
 			i++
-		}
-
-		while (arr[j][field] > pivot[field]) {
-			j--
-		}
-
-		if (i < j) {
 			let temp = arr[i]
 			arr[i] = arr[j]
 			arr[j] = temp
 		}
-	} while (i < j)
+	}
+	i++
+	let temp = arr[high]
+	arr[high] = arr[i]
+	arr[i] = temp
+	return i // position of pivot in sorted array
+}
 
-	// swap arr[low] and a[j]
-	let temp = arr[low]
-	arr[low] = arr[j]
-	arr[j] = temp
-	return j
+// quickSort recursively calling
+const quickSort = (arr, low, high, field) => {
+	if (low < high) {
+		let pivot = partition(arr, low, high, field)
+		quickSort(arr, low, pivot - 1, field) // recusively calling to sort left subarray
+		quickSort(arr, pivot + 1, high, field) // recursively calling to sort right subarray
+	}
 }
 
 let Persons = [
@@ -61,9 +51,11 @@ let Persons = [
 	['Ross', 21, 100000, 'Male'],
 	['James', 25, 36000, 'Female'],
 ]
+
+// arr is array of Person objects
 let arr = []
 Persons.forEach((person) => {
 	arr.push(new Person(...person))
 })
-const Ans = Person.sort(arr, 'salary', 'asc')
-console.log(Ans)
+const sortedArray = Person.sort(arr, 'age', 'asc')
+console.log(sortedArray)
