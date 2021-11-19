@@ -10,7 +10,9 @@
 	"author": "kunal jha",
 	"license": "ISC",
 	"dependencies": {
+		"config": "^3.3.6",
 		"express": "^4.17.1",
+		"mongoose": "^6.0.13",
 		"pug": "^3.0.2"
 	},
 	"devDependencies": {

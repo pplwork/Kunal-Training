@@ -1,43 +1,32 @@
 const express = require('express')
 const path = require('path')
+const connectToDB = require('./config/db')
+const Article = require('./models/Article')
 
 const app = express() // initialiaze express app
+
+// connecting to database
+const PORT = process.env.PORT || 5000
+connectToDB()
+app.listen(PORT, () => {
+	console.log(`Server listening for requests on port: ${PORT}`)
+})
 
 // view engine setup
 app.set('views', path.resolve(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 // home route
-app.get('/', (req, res) => {
-	const articles = [
-		{
-			id: 1,
-			title: 'Article One',
-			body: 'This is aticle one body',
-			author: 'John Doe',
-		},
-		{
-			id: 2,
-			title: 'Article Two',
-			body: 'This is aticle two body',
-			author: 'Sam Smith',
-		},
-		{
-			id: 3,
-			title: 'Article Three',
-			body: 'This is aticle three body',
-			author: 'Ted Philips',
-		},
-	]
-	res.render('index', { title: 'Articles', articles: articles })
+app.get('/', async (req, res) => {
+	try {
+		const articles = await Article.find()
+		res.render('index', { title: 'Articles', articles: articles })
+	} catch (err) {
+		console.log('cannot get articles!!')
+	}
 })
 
-// add article route
+// add-article route
 app.get('/articles/add', (req, res) => {
-	res.render('add_article', { title: 'Add a Article' })
-})
-
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-	console.log(`Server listening for requests on port: ${PORT}`)
+	res.render('add_article', { title: 'Add Article' })
 })
