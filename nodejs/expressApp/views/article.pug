@@ -4,3 +4,5 @@ block content
   h1= article.title
   h4.my-2 Written by #{article.author}
   p.lead= article.body
+  hr
+  a.btn.btn-dark(href=`/article/edit/${article._id}`) Edit

@@ -24,7 +24,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true })) // to accept form data to req.body
 
 // routes
-// get articles
+// get all articles on home page
 app.get('/', async (req, res) => {
 	try {
 		const articles = await Article.find()
@@ -44,7 +44,17 @@ app.get('/article/:id', async (req, res) => {
 	}
 })
 
-// post new article
+// edit a single article form
+app.get('/article/edit/:id', async (req, res) => {
+	try {
+		const article = await Article.findById(req.params.id)
+		res.render('edit_article', { article: article })
+	} catch (err) {
+		console.log(err)
+	}
+})
+
+// post a new article
 app.post('/articles/add', async (req, res) => {
 	const { title, author, body } = req.body
 	try {
@@ -61,7 +71,30 @@ app.post('/articles/add', async (req, res) => {
 	}
 })
 
-// add-article route
+// POST to update article
+app.post('/article/edit/:id', async (req, res) => {
+	const { title, author, body } = req.body
+	const articleFields = {}
+	if (title) articleFields.title = title
+	if (author) articleFields.author = author
+	if (body) articleFields.body = body
+
+	try {
+		await Article.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: articleFields,
+			},
+			{ new: true }
+		)
+		res.redirect(`/article/${req.params.id}`)
+	} catch (err) {
+		console.log('Cannot save article!!')
+		console.log(err)
+	}
+})
+
+// get add-article form
 app.get('/articles/add', (req, res) => {
 	res.render('add_article', { title: 'Add Article' })
 })
