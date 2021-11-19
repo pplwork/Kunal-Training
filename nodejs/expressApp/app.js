@@ -20,8 +20,10 @@ app.set('views', path.resolve(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 // middlewares
-app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true })) // to accept form data to req.body
 
+// routes
 // get articles
 app.get('/', async (req, res) => {
 	try {
@@ -29,6 +31,16 @@ app.get('/', async (req, res) => {
 		res.render('index', { title: 'Articles', articles: articles })
 	} catch (err) {
 		console.log('cannot get articles!!')
+	}
+})
+
+// get a single article
+app.get('/article/:id', async (req, res) => {
+	try {
+		const article = await Article.findOne({ _id: req.params.id })
+		res.render('article', { article: article })
+	} catch (err) {
+		console.log(err)
 	}
 })
 
