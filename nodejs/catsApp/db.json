@@ -1,0 +1,22 @@
+{
+	"cats": [
+		{
+			"id": 1,
+			"name": "cat_one",
+			"age": 2,
+			"breed": "birman"
+		},
+		{
+			"id": 2,
+			"name": "cat_two",
+			"age": 2,
+			"breed": "himalayan"
+		},
+		{
+			"id": 1,
+			"name": "cat_three",
+			"age": 2,
+			"breed": "calico"
+		}
+	]
+}
