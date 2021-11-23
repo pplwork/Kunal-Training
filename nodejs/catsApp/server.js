@@ -26,7 +26,8 @@ server.get('/', (req, res) => {
 
 // GET- get all cats
 server.get('/cats', (req, res) => {
-	res.status(200).json(db.cats)
+	res.render('index', { title: 'Cats', cats: db.cats })
+	// res.status(200).json(db.cats)
 })
 
 // GET- a single cat data

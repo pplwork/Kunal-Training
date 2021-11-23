@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('./partials/head.ejs') %>
+	<body>
+		<%- include('./partials/navbar.ejs') %>
+
+		<% if (cats.length >0 ) { %> 
+			<% cats.forEach(cat => { %>
+				<div class="card" style="width: 18rem">
+					<div class="card-body">
+						<h3 class="card-title"><%= cat.name %> </h3>
+						<h4 class="card-title"><%= cat.breed %> </h4>
+						<h5 class="card-title"><%= cat.age %> </h5>
+						<a href=`/cats/edit/${cat.id}` class="card-link">Edit</a>
+						<a href="/cats" class="card-link">Delete</a>
+					</div>
+				</div>
+			<% }) %>		
+		<% } else { %>
+			<h3>No Cats data to show</h3>
+		<% } %>
+
+		<%- include('./partials/footer.ejs') %> 
+	</body>
+</html>
