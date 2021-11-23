@@ -4,8 +4,7 @@
 	"description": "a REST api with CRUD operations",
 	"main": "server.js",
 	"scripts": {
-		"json-server": "json-server --watch db.json --port 8000",
-		"nodemon": "nodemon server.js"
+		"server": "nodemon server.js"
 	},
 	"keywords": [
 		"node",
