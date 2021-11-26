@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	--primary-color: #047aed;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* base styles */
+h1,
+h2 {
+	font-weight: 300;
+	line-height: 0.8;
+	margin: 10px 0;
+}
+
+p {
+	margin: 10px 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: #333;
+	display: inline-block;
+}
+
+img {
+	width: 100%;
+}
+
+/* navbar */
+.navbar {
+	height: 70px;
+	background-color: var(--primary-color);
+	color: #fff;
+}
+
+.navbar .flex {
+	justify-content: space-between;
+}
+
+.navbar nav > ul {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar nav ul a {
+	padding: 3px 10px;
+	margin: 0 5px;
+	color: #fff;
+}
+
+.navbar nav ul a:hover {
+	border-bottom: 2px solid #fff;
+}
+
+/* showcase */
+.showcase {
+	height: 400px;
+	background-color: var(--primary-color);
+	color: #fff;
+	position: relative;
+}
+
+.showcase .grid {
+	grid-template-columns: 55% 45%;
+	grid-gap: 30px;
+	overflow: visible;
+}
+
+.showcase p {
+	margin: 20px 0;
+}
+
+.showcase-text h1 {
+	font-size: 45px;
+}
+
+.showcase-form {
+	height: 350px;
+	width: 400px;
+	padding: 40px;
+	position: relative; /* means relative to its own original pos */
+	top: 60px;
+	justify-self: flex-end;
+	z-index: 100;
+}
+
+.showcase-form input[type='text'],
+.showcase-form input[type='email'] {
+	margin: 12px 0;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #b4becb;
+	padding: 8px;
+}
+
+.showcase-form input:focus {
+	outline: none;
+}
+
+/* utilities */
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	overflow: auto;
+	padding: 0 40px;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 20px;
+	height: 100%; /* to center everything */
+	justify-content: center;
+	align-items: center;
+}
+
+.card {
+	background-color: #fff;
+	color: #333;
+	border-radius: 10px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	margin: 10px;
+}
