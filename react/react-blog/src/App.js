@@ -1,15 +1,25 @@
 import './App.css'
-import Navbar from './Navbar'
-import Home from './Home'
+import { Fragment } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from './components/layout/Home'
+import Navbar from './components/layout/Navbar'
+import CreateBlog from './components/blogs/CreateBlog'
+import BlogDetails from './components/blogs/BlogDetails'
 
-function App() {
+const App = () => {
 	return (
-		<div className='App'>
-			<Navbar />
-			<div className='content'>
-				<Home />
-			</div>
-		</div>
+		<Router>
+			<Fragment>
+				<Navbar />
+				<div className='container'>
+					<Switch>
+						<Route exact path='/' component={Home} />
+						<Route exact path='/create' component={CreateBlog} />
+						<Route exact path='/blogs/:id' component={BlogDetails} />
+					</Switch>
+				</div>
+			</Fragment>
+		</Router>
 	)
 }
 
